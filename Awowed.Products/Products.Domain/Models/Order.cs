@@ -1,26 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace Products.Domain.Models
 {
     public class Order
     {
-        [JsonPropertyName("id")]
         public Guid Id { get; }
         
-        [JsonPropertyName("user_id")]
         public Guid UserId { get; }
         
-        [JsonPropertyName("products_ids")]
         public List<string> ProductsIds { get; }
         
-        [JsonPropertyName("date_ordered")]
         public DateTime DateOrdered { get; }
         
-        [JsonPropertyName("order_status")]
         public OrderStatus OrderStatus { get; set; }
 
         public Order(Guid? id = null, Guid? userId = null, IEnumerable<string>? productsIds = null)

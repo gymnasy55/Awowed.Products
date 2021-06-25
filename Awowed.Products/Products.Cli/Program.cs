@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Products.Domain.Models;
 using Products.Domain.Repositories;
+using Products.Service.Services;
 
 namespace Products.Cli
 {
@@ -9,23 +11,27 @@ namespace Products.Cli
     {
         private static void Main(string[] args)
         {
-            // var role1 = new GuestRole();
-            // Console.WriteLine(string.Join(" ", role1.Permissions));
-            //
-            // var role2 = new UserRole();
-            // Console.WriteLine(string.Join(" ", role2.Permissions));
-            //
-            // var role3 = new AdminRole();
-            // Console.WriteLine(string.Join(" ", role3.Permissions));
-
-            var repos = new ProductsRepository();
-            repos.SaveProduct(new Product());
-            repos.SaveProduct(new Product());
-            repos.SaveProduct(new Product());
-            repos.SaveProduct(new Product());
-            repos.SaveProduct(new Product());
+            var fileWorker = (IFileWorker) new FileWorker();
+            var jsonWorker = (IJsonWorker) new JsonWorker();
+            var fileName = "info.json";
             
-            repos.Write("info.json");
+            var repos = new ProductsRepository(fileWorker, jsonWorker);
+            // repos.SaveProduct(new Product());
+            // repos.SaveProduct(new Product());
+            // repos.SaveProduct(new Product());
+            // repos.SaveProduct(new Product());
+            // repos.SaveProduct(new Product());
+            //
+            // repos.SaveToFile(fileName);
+
+            repos.LoadFromFile(fileName);
+
+            var products = repos.GetAllProducts().Values;
+            
+            foreach (var product in products)
+            {
+                Console.WriteLine(product);
+            }
         }
     }
 }
