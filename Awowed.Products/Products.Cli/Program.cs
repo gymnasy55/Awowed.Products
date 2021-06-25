@@ -16,6 +16,7 @@ namespace Products.Cli
             var fileName = "info.json";
             
             var repos = new ProductsRepository(fileWorker, jsonWorker);
+            
             // repos.SaveProduct(new Product());
             // repos.SaveProduct(new Product());
             // repos.SaveProduct(new Product());
@@ -25,7 +26,7 @@ namespace Products.Cli
             // repos.SaveToFile(fileName);
 
             repos.LoadFromFile(fileName);
-
+            
             var products = repos.GetAllProducts().Values;
             
             foreach (var product in products)
