@@ -3,5 +3,6 @@
     public interface IRole
     { 
         Permissions[] Permissions { get; }
+        string ToString();
     }
 }

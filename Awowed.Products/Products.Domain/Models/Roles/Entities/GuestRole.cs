@@ -4,9 +4,9 @@ namespace Products.Domain.Models
 {
     public class GuestRole : IRole
     {
-        public Permissions[] Permissions { get; }
+        public static Permissions[] Permissions { get; }
 
-        public GuestRole()
+        static GuestRole()
         {
             Permissions = new[]
             {
@@ -17,6 +17,9 @@ namespace Products.Domain.Models
             };
         }
         
-        public override string ToString() => "Guest";
+        public new static string ToString() => "Guest";
+
+        Permissions[] IRole.Permissions => Permissions;
+        string IRole.ToString() => ToString();
     }
 }

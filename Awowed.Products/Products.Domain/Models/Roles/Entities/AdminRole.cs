@@ -1,12 +1,10 @@
-﻿using System.Collections.Generic;
-
-namespace Products.Domain.Models
+﻿namespace Products.Domain.Models
 {
     public class AdminRole : IRole
     {
-        public Permissions[] Permissions { get; }
+        public static Permissions[] Permissions { get; }
 
-        public AdminRole()
+        static AdminRole()
         {
             Permissions = new[]
             {
@@ -27,6 +25,9 @@ namespace Products.Domain.Models
             };
         }
 
-        public override string ToString() => "Admin";
+        public new static string ToString() => "Admin";
+        
+        Permissions[] IRole.Permissions => Permissions;
+        string IRole.ToString() => ToString();
     }
 }
