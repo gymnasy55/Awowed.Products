@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using Products.Domain.Models;
 using Products.Service.Services;
 
@@ -28,20 +27,20 @@ namespace Products.Domain.Repositories
             if (!File.Exists(fileName)) 
                 throw new ArgumentException("File does not exists!");
 
-            var products = _jsonWorker.Deserialize<List<Product>>(_fileWorker.Read(fileName));
+            var products = _jsonWorker.Deserialize<IEnumerable<Product>>(_fileWorker.Read(fileName));
 
             foreach (var product in products)
-                SaveProduct(product);
+                Save(product);
         }
 
         public void SaveToFile(string fileName) => _fileWorker.Write(fileName, _jsonWorker.Serialize(_products.Values));
     
-        public IDictionary<Guid, Product> GetAllProducts() => _products;
+        public IDictionary<Guid, Product> GetAll() => _products;
     
-        public Product GetProductById(Guid id) => _products[id];
-        public Product GetProductById(string id) => GetProductById(Guid.Parse(id));
+        public Product GetById(Guid id) => _products[id];
+        public Product GetById(string id) => GetById(Guid.Parse(id));
     
-        public void SaveProduct(Product product)
+        public void Save(Product product)
         {
             if (_products.ContainsKey(product.Id))
             {
