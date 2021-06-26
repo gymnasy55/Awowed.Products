@@ -18,6 +18,7 @@ namespace Products.Domain.Models
         public List<string> ProductsIds { get; }
         
         [JsonProperty("date_ordered")]
+        [JsonConverter(typeof(JavaScriptDateTimeConverter))]
         public DateTime DateOrdered { get; }
         
         [JsonProperty("order_status")]
