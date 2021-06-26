@@ -24,7 +24,7 @@ namespace Products.Domain.Models
         [JsonConverter(typeof(StringEnumConverter))]
         public OrderStatus OrderStatus { get; set; }
 
-        public Order(Guid? id = null, Guid? userId = null, IEnumerable<string>? productsIds = null)
+        public Order(Guid? userId = null, Guid? id = null, IEnumerable<string>? productsIds = null)
         {
             DateOrdered = DateTime.Now;
             OrderStatus = OrderStatus.New;
