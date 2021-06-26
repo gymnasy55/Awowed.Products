@@ -29,17 +29,7 @@ namespace Products.Domain.Models
             Description = description ?? "Default Description";
             Price = price ?? 0;
         }
-        
-        private Product(string id, string name, string category, string description,
-            decimal price)
-        {
-            Id = Guid.Parse(id);
-            Name = name;
-            Category = category;
-            Description = description;
-            Price = price;
-        }
-        
+
         public override string ToString() => 
             $"ID: {Id}\nName: {Name}\nCategory: {Category}\nDescription: {Description}\nPrice: {Price} UAH";
     }
