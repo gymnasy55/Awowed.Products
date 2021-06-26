@@ -1,13 +1,23 @@
 ﻿using System;
+using Newtonsoft.Json;
 
 namespace Products.Domain.Models
 {
     public class User
     {
+        [JsonProperty("id")]
         public Guid Id { get; }
+        
+        [JsonProperty("role")]
         public IRole Role { get; set; }
+        
+        [JsonProperty("login")]
         public string Login { get; set; }
+        
+        [JsonProperty("password")]
         public string Password { get; set; }
+        
+        [JsonProperty("info")]
         public string Info { get; set; }
 
         public User(Guid? id = null, IRole? role = null, string? login = null, string? password = null,

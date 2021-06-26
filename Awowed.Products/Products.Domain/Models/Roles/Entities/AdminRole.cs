@@ -1,4 +1,6 @@
-﻿namespace Products.Domain.Models
+﻿using System;
+
+namespace Products.Domain.Models
 {
     public class AdminRole : IRole
     {

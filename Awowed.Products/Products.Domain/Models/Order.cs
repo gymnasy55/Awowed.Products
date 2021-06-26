@@ -1,19 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace Products.Domain.Models
 {
     public class Order
     {
+        [JsonProperty("id")]
         public Guid Id { get; }
         
+        [JsonProperty("user_id")]
         public Guid UserId { get; }
         
+        [JsonProperty("products_ids")]
         public List<string> ProductsIds { get; }
         
+        [JsonProperty("date_ordered")]
         public DateTime DateOrdered { get; }
         
+        [JsonProperty("order_status")]
+        [JsonConverter(typeof(StringEnumConverter))]
         public OrderStatus OrderStatus { get; set; }
 
         public Order(Guid? id = null, Guid? userId = null, IEnumerable<string>? productsIds = null)
