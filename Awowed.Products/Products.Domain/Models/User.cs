@@ -18,21 +18,16 @@ namespace Products.Domain.Models
         
         [JsonProperty("password")]
         public string Password { get; set; }
-        
-        [JsonProperty("info")]
-        public string Info { get; set; }
 
-        public User(Guid? id = null, Roles? role = null, string? login = null, string? password = null,
-            string? info = null)
+        public User(Guid? id = null, Roles? role = null, string? login = null, string? password = null)
         {
             Id = id ?? Guid.NewGuid();
             Role = role ?? Roles.Guest;
             Login = login ?? "Default Login";
             Password = password ?? "Default Password";
-            Info = info ?? "Default Info";
         }
 
         public override string ToString() =>
-            $"ID: {Id}\nRole: {PermissionsManager.GetName(Role)}\nLogin: {Login}\nPassword: {Password}\nInfo: {Info}";
+            $"ID: {Id}\nRole: {PermissionsManager.GetName(Role)}\nLogin: {Login}\nPassword: {Password}";
     }
 }

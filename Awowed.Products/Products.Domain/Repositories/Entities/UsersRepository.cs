@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Products.Domain.Models;
 using Products.Service;
 using Products.Service.Services;
@@ -52,6 +53,13 @@ namespace Products.Domain.Repositories
             }
             
             _users.Add(user.Id, user);
+            SaveToFile("users.json");
         }
+
+        public User? GetByLogin(string login) =>
+            _users.Values.FirstOrDefault(user => user.Login == login);
+
+        public User? GetByLoginAndPassword(string login, string password) =>
+            _users.Values.FirstOrDefault(user => user.Login == login && user.Password == password);
     }
 }
