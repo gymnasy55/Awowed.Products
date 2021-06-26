@@ -8,14 +8,14 @@ namespace Products.Domain.Repositories
 {
     public class UsersRepository : IUsersRepository
     {
-        private readonly IFileWorker _fileWorker;
-        private readonly IJsonWorker _jsonWorker;
+        private readonly IFileService _fileService;
+        private readonly IJsonService _jsonService;
         private readonly IDictionary<Guid, User> _users;
 
-        public UsersRepository(IFileWorker fileWorker, IJsonWorker jsonWorker)
+        public UsersRepository(IFileService fileService, IJsonService jsonService)
         {
-            _fileWorker = fileWorker;
-            _jsonWorker = jsonWorker;
+            _fileService = fileService;
+            _jsonService = jsonService;
             _users = new Dictionary<Guid, User>();
         }
         
@@ -27,13 +27,13 @@ namespace Products.Domain.Repositories
             if (!File.Exists(fileName)) 
                 throw new ArgumentException("File does not exists!");
 
-            var users = _jsonWorker.Deserialize<IEnumerable<User>>(_fileWorker.Read(fileName));
+            var users = _jsonService.Deserialize<IEnumerable<User>>(_fileService.Read(fileName));
 
             foreach (var user in users)
                 Save(user);
         }
 
-        public void SaveToFile(string fileName) => _fileWorker.Write(fileName, _jsonWorker.Serialize(_users.Values));
+        public void SaveToFile(string fileName) => _fileService.Write(fileName, _jsonService.Serialize(_users.Values));
 
         public IDictionary<Guid, User> GetAll() => _users;
 

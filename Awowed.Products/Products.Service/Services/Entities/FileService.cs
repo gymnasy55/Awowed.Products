@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Products.Service.Services
 {
-    public class FileWorker : IFileWorker
+    public class FileService : IFileService
     {
         public static string Read(string fileName)
         {
@@ -24,7 +24,7 @@ namespace Products.Service.Services
             writer.Write(text);
         }
 
-        string IFileWorker.Read(string fileName) => Read(fileName);
-        void IFileWorker.Write(string fileName, string text) => Write(fileName, text);
+        string IFileService.Read(string fileName) => Read(fileName);
+        void IFileService.Write(string fileName, string text) => Write(fileName, text);
     }
 }

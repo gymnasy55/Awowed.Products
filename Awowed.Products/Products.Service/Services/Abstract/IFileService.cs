@@ -1,8 +1,6 @@
-﻿using System.Threading.Tasks;
-
-namespace Products.Service.Services
+﻿namespace Products.Service.Services
 {
-    public interface IFileWorker
+    public interface IFileService
     {
         string Read(string fileName);
         
