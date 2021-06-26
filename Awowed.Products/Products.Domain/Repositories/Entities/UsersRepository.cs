@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using Products.Domain.Models;
+using Products.Service;
 using Products.Service.Services;
+using AppContext = Products.Domain.Models.AppContext;
 
 namespace Products.Domain.Repositories
 {
@@ -12,11 +14,11 @@ namespace Products.Domain.Repositories
         private readonly IJsonService _jsonService;
         private readonly IDictionary<Guid, User> _users;
 
-        public UsersRepository(IFileService fileService, IJsonService jsonService)
+        public UsersRepository(AppContext context, ServiceManager manager)
         {
-            _fileService = fileService;
-            _jsonService = jsonService;
-            _users = new Dictionary<Guid, User>();
+            _fileService = manager.FileService;
+            _jsonService = manager.JsonService;
+            _users = context.Users;
         }
         
         public void LoadFromFile(string fileName)
