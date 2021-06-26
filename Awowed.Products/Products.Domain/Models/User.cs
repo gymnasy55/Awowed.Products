@@ -1,5 +1,6 @@
 ﻿using System;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace Products.Domain.Models
 {
@@ -9,7 +10,8 @@ namespace Products.Domain.Models
         public Guid Id { get; }
         
         [JsonProperty("role")]
-        public IRole Role { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public Roles Role { get; set; }
         
         [JsonProperty("login")]
         public string Login { get; set; }
@@ -20,17 +22,17 @@ namespace Products.Domain.Models
         [JsonProperty("info")]
         public string Info { get; set; }
 
-        public User(Guid? id = null, IRole? role = null, string? login = null, string? password = null,
+        public User(Guid? id = null, Roles? role = null, string? login = null, string? password = null,
             string? info = null)
         {
             Id = id ?? Guid.NewGuid();
-            Role = role ?? new GuestRole();
+            Role = role ?? Roles.Guest;
             Login = login ?? "Default Login";
             Password = password ?? "Default Password";
             Info = info ?? "Default Info";
         }
 
         public override string ToString() =>
-            $"ID: {Id}\nRole: {Role}\nLogin: {Login}\nPassword: {Password}\nInfo: {Info}";
+            $"ID: {Id}\nRole: {PermissionsManager.GetName(Role)}\nLogin: {Login}\nPassword: {Password}\nInfo: {Info}";
     }
 }
